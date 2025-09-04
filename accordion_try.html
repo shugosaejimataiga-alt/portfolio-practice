@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Q&Aアコーディオン</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px; /*周囲の余白*/
+      background-color: #f0f0f0;
+    }
+
+    .qa-item {
+      margin-bottom: 15px; /*質問と質問の間の余白*/
+      background-color: white;
+      border-radius: 8px; /*角を丸く*/
+      padding: 10px; /*内側の余白*/
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1); /*影をつける*/
+    }
+
+    .question {
+      font-weight: bold; /*太字にする*/
+      cursor: pointer; /*マウスを当てると「指マーク」に変わる*/
+      margin: 0; /*デフォルトの余白を消す*/
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .answer {
+      display:none; /*初期状態では非表示*/
+      margin-top: 5px; /*上に余白*/
+      color: #333;
+    }
+
+    .icon {
+      font-weight: bold;
+      color:#0066cc;
+    }
+  </style>
+</head>
+<body>
+  <!--ページの大見出し-->
+  <h1>よくある質問（Q&A）</h1>
+
+  <!--Q&Aの1セット目-->
+  <div class="qa-item">
+    <p class="question">Q1. このWebサイトは何ですか
+    <span class="icon">＋</span></p>
+    <p class="answer">A1. これは私が作ってきたポートフォリオ紹介のデモページです。</p>
+  </div>
+  
+
+
+
+
+
+  <div class="qa-item">
+    <p class="question">Q2. なぜITエンジニアになろうと思ったのか
+    <span class="icon">＋</span></p>
+    <p class="answer">A2. モノ作りが幼いころから好きで、モノづくりをして人の幸せに貢献したいと思ったから</p>
+  </div>
+
+  <div class="qa-item">
+    <p class="question">Q3. 何のために働くのか。
+    <span class="icon">＋</span></p>
+    <p class="answer">A3. 家族の幸せの為です。</p>
+  </div>
+
+  <!-- JavaScriptのコード（jQueryのスクリプト）-->
+  <script>
+    $(document).ready(function(){
+      $(".question").click(function(){
+        //他の答えをすべて閉じる
+        $(".answer").slideUp();
+        $(".icon").text("＋");
+
+        //クリックしたものが閉じていたら開く
+        if(!$(this).next(".answer").is(":visible")){
+          $(this).next(".answer").slideDown();
+          $(this).find(".icon").text("－"); //アイコンをマイナスに
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+
+<!--用語                 意味                           
+`$(document).ready()`  | ページが読み込まれてから処理を実行する合図
+`.click(function(){})` | 要素がクリックされたときに実行される処理 
+`$(this)`              | クリックされたその要素自体 
+`.next(".answer")`     | 「その次にある `.answer` クラスの要素」を取得
+`.slideToggle()`       | 上下に開閉する動きを切り替える（アニメーション）
+
+なぜ「.answer」が必要か
+next("answer") → <answer>というHTMLタグを探す
+next(".answer") → class="answer"を持つ要素を探す（←これが正解！）

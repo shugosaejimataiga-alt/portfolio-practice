@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Q&Aアコーディオン（改良版）</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f0f0f0;
+    }
+
+    .qa-item {
+      margin-bottom: 15px;
+      background-color: white;
+      border-radius: 8px;
+      padding: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .question {
+      font-weight: bold;
+      cursor: pointer;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .answer {
+      display: none;
+      margin-top: 5px;
+      color: #333;
+    }
+
+    /* アイコン部分 */
+    .icon {
+      font-weight: bold;
+      color: #0066cc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>よくある質問（Q&A）</h1>
+
+  <div class="qa-item">
+    <p class="question">Q1. このWebサイトは何ですか？ <span class="icon">＋</span></p>
+    <p class="answer">A1. これはjQueryを使って作ったQ&A形式のデモページです。</p>
+  </div>
+
+  <div class="qa-item">
+    <p class="question">Q2. jQueryとは何ですか？ <span class="icon">＋</span></p>
+    <p class="answer">A2. JavaScriptを簡単に書けるようにするためのライブラリです。</p>
+  </div>
+
+  <div class="qa-item">
+    <p class="question">Q3. このアコーディオンはどう動きますか？ <span class="icon">＋</span></p>
+    <p class="answer">A3. 質問をクリックすると答えが開閉します。</p>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $(".question").click(function(){
+        // 他の答えをすべて閉じる
+        $(".answer").slideUp();
+        $(".icon").text("＋");
+
+        // クリックしたものが閉じていたら開く
+        if(!$(this).next(".answer").is(":visible")){
+          $(this).next(".answer").slideDown();
+          $(this).find(".icon").text("－"); // アイコンをマイナスに
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
